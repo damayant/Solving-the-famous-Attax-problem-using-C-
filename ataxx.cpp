@@ -42,8 +42,6 @@ bool Score(char (&p_board)[9][9],int &n)
 
         }
     }
-   // cout<<"white:"<<white_score<<endl;
-    //cout<<"black:"<<black_score<<endl;
     return  flag;
 }
 
@@ -135,10 +133,6 @@ void Copy(int &n,char (&cboard)[9][9],char p_board[9][9])
 
 int undoCopy(int &n,char (&undo_board)[500][9][9],char p_board[9][9])
 {
-
-    //for(int k=0;k<counter;k++)
-   // {
-
     counter++;
 
     for(int i=0;i<n;i++)
@@ -149,10 +143,7 @@ int undoCopy(int &n,char (&undo_board)[500][9][9],char p_board[9][9])
             undo_board[counter][i][j]=p_board[i][j];
         }
     }
-    //counter++;
     return counter;
-
-    //}
 }
 
 
@@ -172,17 +163,12 @@ void display(char (&p_board)[9][9],int &n)
 
 void undo_display(char (&undo_board)[500][9][9],char (&p_board)[9][9],int &n,int &counter)
 {
-    //cout <<"value sent by undo "<<counter<<endl;
-
-  // int c=undoCopy(n,undo_board,p_board);
         for (int i=0; i < n; i++)
         {
             for (int j=0; j < n; j++)
             {
-                //cout<<"counter:"<<counter<<endl;
                 cout << undo_board[counter-1][i][j] ;
                 p_board[i][j]=undo_board[counter-1][i][j];
-                //cin>>state;
             }
             cout << endl;
         }
@@ -287,11 +273,6 @@ void capture(char (&p_board)[9][9],int tx, int ty,char color)
 bool MakeMove(char (&p_board)[9][9],int fx,int fy,int tx,int ty,char color)
 {
     bool flag;
-
-
-
-
-
     if ((p_board[tx][ty]!='x'))
     {
         if((p_board[tx][ty]!='w')||(p_board[tx][ty]!='b'))
@@ -381,12 +362,8 @@ vector<int> MoveList(char (&p_board)[9][9],int n,char color)
                         {
                             if(p_board[x][y]=='e')
                             {
-                                //cout<<i<<j<<'-->'<<x<<y<<endl;
                                 int vala=(1000*(i+1))+(100*(j+1))+(10*(x+1))+(y+1);
-                                //cout<<"pushing"<<endl;
                                 mlist.push_back(vala);
-                                //cout<<"pushed"<<endl;
-
                             }
                         }
                     }
@@ -394,7 +371,6 @@ vector<int> MoveList(char (&p_board)[9][9],int n,char color)
             }
         }
     }
-    // cout<<&mlist<<endl;
     return mlist;
 }
 
@@ -456,12 +432,8 @@ vector<int> MoveListb(char (&p_board)[9][9],int n,char color)
                         {
                             if(p_board[x][y]=='e')
                             {
-                                //cout<<i<<j<<'-->'<<x<<y<<endl;
                                 int valb=(1000*(i+1))+(100*(j+1))+(10*(x+1))+(y+1);
-                                //cout<<"pushing"<<endl;
                                 mlistb.push_back(valb);
-                                //cout<<"pushed"<<endl;
-
                             }
                         }
                     }
@@ -469,7 +441,6 @@ vector<int> MoveListb(char (&p_board)[9][9],int n,char color)
             }
         }
     }
-    // cout<<&mlist<<endl;
     return mlistb;
 }
 
@@ -530,11 +501,8 @@ vector<int> MoveLista(char (&p_board)[9][9],int n,char color)
                         {
                             if(p_board[x][y]=='e')
                             {
-                                //cout<<i<<j<<'-->'<<x<<y<<endl;
                                 int vala=(1000*(i+1))+(100*(j+1))+(10*(x+1))+(y+1);
-                                //cout<<"pushing"<<endl;
                                 mlista.push_back(vala);
-                                //cout<<"pushed"<<endl;
 
                             }
                         }
@@ -543,7 +511,6 @@ vector<int> MoveLista(char (&p_board)[9][9],int n,char color)
             }
         }
     }
-    // cout<<&mlist<<endl;
     return mlista;
 }
 
@@ -562,7 +529,6 @@ int children(vector<int> a)
 
 int negamaxA(int (&n),char (&p_board)[9][9],int depth, int alpha,int beta, char color)
 {
-    //Copy(n,cboard,p_board);
     int fx,fy,tx,ty;
 
     if((depth = 0)||(gameover(n,p_board,(color=='w'))==true))
@@ -588,8 +554,6 @@ int negamaxA(int (&n),char (&p_board)[9][9],int depth, int alpha,int beta, char 
         int v = -negamaxA(n,p_board, d, -beta, -alpha, color );
         bestValue = max(bestValue,v);
         alpha = max(alpha,v);
-        //cout<<alpha;
-        //cout<<bestValue;
         if(alpha>= beta)
         {
             break;
@@ -601,7 +565,6 @@ int negamaxA(int (&n),char (&p_board)[9][9],int depth, int alpha,int beta, char 
 
 int negamaxB(int (&n),char (&p_board)[9][9],int depth, int alpha,int beta, char color)
 {
-    //Copy(n,cboard,p_board);
     int fx,fy,tx,ty;
 
     if((depth = 0)||(gameover(n,p_board,(color=='b'))==true))
@@ -627,8 +590,6 @@ int negamaxB(int (&n),char (&p_board)[9][9],int depth, int alpha,int beta, char 
         int v = -negamaxB(n,p_board, d, -beta, -alpha, color );
         bestValueb = max(bestValueb,v);
         alpha = max(alpha,v);
-        //cout<<alpha;
-        //cout<<bestValueb;
         if(alpha>= beta)
         {
             break;
@@ -642,15 +603,10 @@ int main()
 {
 
     char f,t;
-   // int ufx,ufy,utx,uty,fx,fy,tx,ty;
-   // int k;
 
-    //char state;
     char p_board[9][9],board[9][9];
     int alpha=INT_MAX, beta=INT_MIN;
 
-    //int rw,cl;
-    //char undo_board [10][10][10] = {counter, rw, cl};
     cout<<"Welcome to Ataxx"<<endl;
     cout<<"After setting up the board or after each move select the player by pressing w  OR  b unless the player turn comes automatically" <<endl;
     
@@ -663,7 +619,6 @@ int main()
         switch(state)
         {
 
-                //cin>>state;
 
             case 'i' :
                 char s;
@@ -672,7 +627,6 @@ int main()
                 cin>>n;
                 cin>>s;
 
-                //counter++;
                 if(s=='s')
                 {
                     for (int i=0; i < n; i++)
@@ -686,14 +640,11 @@ int main()
 
                     display(p_board,n);
 
-                    //counter++;
                     undoCopy(n,undo_board,p_board);
-                    //undo_display(undo_board,n,counter);
 
                 }
                 break;
 
-                //cin>>state;
 
 
 
@@ -705,12 +656,10 @@ int main()
             case 'd' :
                 cin>>d;
                 break;
-               // cin>>state;
 
 
             case 'u':
                 cout<<"undo-ing:"<<endl;
-                //cout<<endl;
                 undo_display(undo_board,p_board,n,counter);
                 cin>>state;
                 break;
@@ -743,12 +692,10 @@ int main()
               case 'd' :
                   cin>>d;
                   break;
-                 // cin>>state;
 
 
               case 'u':
                   cout<<"undo-ing:"<<endl;
-                  //cout<<endl;
                   undo_display(undo_board,p_board,n,counter);
                   cin>>state;
                   break;
@@ -769,14 +716,12 @@ int main()
                     MakeMove(p_board, fx, fy, tx, ty, color);
                     display(p_board, n);
 
-                    //counter++;
                     undoCopy(n,undo_board,p_board);
 
                     gameover(n,p_board,color);
 
                     break;
 
-                 //   cin>>state;
 
 
 
@@ -798,15 +743,10 @@ int main()
                             int scb = nodesb.at(i);
                             retrieve_points(scb,fx,fy,tx,ty);
                             Copy(n,board,p_board);
-                            //cout<<"in progress"<<endl;
                             LegalMove(board, fx,fy, tx, ty, color);
                             MakeMove(board,fx,fy,tx,ty,color);
-                            //cout<<fx<<","<<fy<<"-->>"<<tx<<","<<ty<<endl;
-                            //display(p_board,n);
                             Copy(n,global,board);
                             int getvalueb=negamaxB(n,board, d, alpha, beta,color);
-                            //cout<<"after negamax"<<endl;
-                            //counter++;
                             storeb.push_back(getvalueb);
                             //cout<<"after negamax"<<endl;
                             //cout<<&storeb;
