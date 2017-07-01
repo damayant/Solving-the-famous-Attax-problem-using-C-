@@ -802,12 +802,10 @@ int main()
               case 'd' :
                   cin>>d;
                   break;
-                 // cin>>state;
 
 
               case 'u':
                   cout<<"undo-ing:"<<endl;
-                  //cout<<endl;
                   undo_display(undo_board,p_board,n,counter);
                   cin>>state;
                   break;
@@ -835,7 +833,6 @@ int main()
                     gameover(n,p_board,color);
                     break;
 
-                 //   cin>>state;
 
 
                 case 'g':
@@ -855,18 +852,11 @@ int main()
                             int sc = nodes.at(i);
                             retrieve_points(sc,fx,fy,tx,ty);
                             Copy(n,board,p_board);
-                            //cout<<"in progress"<<endl;
                             LegalMove(board, fx,fy, tx, ty, color);
                             MakeMove(board,fx,fy,tx,ty,color);
-                          //  cout<<fx<<","<<fy<<"-->>"<<tx<<","<<ty<<endl;
-                            //display(p_board,n);
                             Copy(n,global,board);
                             int getvalue=negamaxA(n,board, d, alpha, beta,color);
-                            //cout<<"after negamax"<<endl;
-                            //counter++;
                             store.push_back(getvalue);
-                            //cout<<"after negamax"<<endl;
-                            //cout<<&store;
                             if(getvalue >best)
                             {
                                 best=getvalue;
@@ -880,7 +870,6 @@ int main()
                         retrieve_points(gotmove,fx,fy,tx,ty);
                         LegalMove(p_board, fx,fy, tx, ty, color);
                         MakeMove(p_board, fx, fy, tx, ty, color);
-                        //cout<<"after negamax"<<endl;
                         cout<<fx<<","<<fy<<"-->>"<<tx<<","<<ty<<endl;
 			cout<<"Alpha Beta calls:"<<n2<<endl;
 			cout<<"Depth :"<<d<<endl;			
@@ -888,11 +877,9 @@ int main()
                         display(p_board,n);
                         player=player*(-1);
 
-                        //counter++;
                         undoCopy(n,undo_board,p_board);
 
                         break;
-                    //    cin>>state;
 
                     }
             }
